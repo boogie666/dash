@@ -13,7 +13,12 @@ first do this
 
 > cp ./config.edn ./config_prod.edn
 
-then run the build script
+then edit the ./config_prod.edn file and add all your links.
+
+(this needs to be done once, in order to create all needed files for the build)
+
+
+then run the build script (this should be done everytime you want to do a production build)
 
 > ./scripts/build
 
