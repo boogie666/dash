@@ -3,7 +3,7 @@ Simple configurable link shortcut dashboard for nodejs
 
 edit the config.edn file with your own links :)
 
-I use it for my home network to add Kodi Corus Web UI and Transmision Web Client some only those two icon are available.
+I use it for my home network to add Kodi Chorus Web UI and Transmision Web Client some only those two icon are available.
 
 This repo is also an example of how awesome clojure.spec is :) all html is created in a Hiccup-like style that is speced and parsed with clojure.spec
 
