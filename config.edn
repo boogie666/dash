@@ -1,0 +1,5 @@
+{:page-title "Home network dashboard"
+ :port 1337
+ :images-folder "public"
+ :dash-items [{:url "#" :title "Kodi" :desc "Media center remote" :img "kodi.png"}
+              {:url "#" :title "Transmission" :desc "Torrent client" :img "transmission.png"}]}

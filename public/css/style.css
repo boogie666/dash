@@ -1,0 +1,12 @@
+.card {
+  min-width: 250px;
+}
+.card:hover {
+  transform: scale(1.005)
+}
+.card img{
+  filter: opacity(90%);
+}
+.card:hover img {
+  filter: opacity(100%);
+}
