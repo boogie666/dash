@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo "building cljs stuff"
+lein do clean, cljsbuild once prod
+echo "building node stuff"
+npm install
+echo "building done. Now packeging"
+mkdir dash-build
+
+
+echo "Moving needed files."
+cp server.js ./dash-build/server.js
+cp package.json ./dash-build/package.json
+cp -r public/ ./dash-build/public
+cp -r node_modules/ ./dash-build/node_modules
+
+echo "Copy prod config"
+cp config_prod.edn ./dash-build/config.edn
+
+echo "Building archive."
+tar -zcvf dash-build.tar.gz dash-build/
+
+echo "Clean up."
+rm -r ./dash-build
+lein clean
+echo "Done."
+

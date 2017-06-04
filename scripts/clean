@@ -1,0 +1,11 @@
+#/bin/bash
+echo "lein clean"
+lein do clean
+echo "remove dash-build.tar.gz"
+
+if [ -f "./dash-build.tar.gz" ]; then
+	rm ./dash-build.tar.gz
+fi
+
+echo "cleanup done"
+

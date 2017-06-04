@@ -2,7 +2,7 @@
 /lib/
 /node_modules/
 /target/
-/scripts/
+/scripts/deploy
 config_prod.edn
 .lein-*
 *.jar
