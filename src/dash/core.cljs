@@ -9,6 +9,11 @@
 (def fs (js/require "fs"))
 (def path (js/require "path"))
 
+
+(def args (.-argv js/process))
+(when (<= (count args) 2)
+  (throw (js/Error. "Missing config.edn")))
+
 (def config (r/read-string (.toString (.readFileSync fs (last (.-argv js/process))))))
 
 

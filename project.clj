@@ -23,7 +23,6 @@
                                    :source-map true}}
                        {:id "prod"
                         :source-paths ["src"]
-                        :resource-path ["node_modules"]
                         :compiler {:output-to "server.js"
                                    :output-dir "target/server_prod"
                                    :target :nodejs
