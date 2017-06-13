@@ -2,4 +2,5 @@
  :port 1337
  :images-folder "public"
  :dash-items [{:group "Media" :items [{:url "#" :title "Kodi"  :img "kodi.png"}
-                                      {:url "#" :title "Transmission" :desc "Torrent client" :img "transmission.png"}]}]}
+                                      {:url "#" :title "Transmission" :desc "Torrent client" :img "transmission.png"}]}
+              {:url "#" :title "Some other Tool" :desc "A Tool" :img "router.png"}]}

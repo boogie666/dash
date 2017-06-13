@@ -3,18 +3,19 @@
             [clojure.string :as string])
   (:require-macros [cljs.spec.alpha :as s]))
 
+
+(s/def ::params (s/map-of keyword? any?))
+
+(s/def ::element
+  (s/cat :name keyword?
+         :args (s/? ::params)
+         :body (s/* ::node)))
+
 (def non-closing-elements
   #{:area :base :br :col :command
     :embed :hr :img :input :link
     :meta :keygen :param :source
     :track :wbr})
-
-(s/def ::params (s/map-of keyword? any?))
-
-(s/def ::element
-  (s/cat :name (s/and keyword? #(not (non-closing-elements %)))
-         :args (s/? ::params)
-         :body (s/* ::node)))
 
 (s/def ::void-element
   (s/cat :name non-closing-elements
@@ -25,8 +26,6 @@
         :void-element ::void-element
         :element ::element))
 
-(s/def ::style
-  (s/map-of keyword? string?))
 
 (declare stringify-html)
 

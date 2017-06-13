@@ -2,9 +2,9 @@
 
 echo "lein clean"
 lein do clean
-echo "remove dash-build.tar.gz"
 
 if [ -f "./dash-build.tar.gz" ]; then
+	echo "remove dash-build.tar.gz"
 	rm ./dash-build.tar.gz
 fi
 

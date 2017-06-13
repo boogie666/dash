@@ -6,13 +6,17 @@
 
   :dependencies [[org.clojure/clojure "1.9.0-alpha16"]
                  [org.clojure/clojurescript "1.9.562"]
-                 [org.clojure/spec.alpha "0.1.109"]
-                 [figwheel-sidecar "0.5.10"]]
+                 [org.clojure/spec.alpha "0.1.123"]]
   :plugins [[lein-cljsbuild "1.1.6"]
             [lein-figwheel "0.5.10"]
             [lein-ancient "0.6.10"]]
   :source-paths ["src"]
   :clean-targets ["server.js" "target"]
+  :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.10"]
+                                  [com.cemerick/piggieback "0.2.2"]
+                                  [org.clojure/tools.nrepl  "0.2.13"]]
+                   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}}
+                   
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src"]
                         :figwheel true
