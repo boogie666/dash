@@ -1,7 +1,7 @@
 (ns dash.html
-  (:require [clojure.spec :as s]
+  (:require [clojure.spec.alpha :as s]
             [clojure.string :as string])
-  (:require-macros [cljs.spec :as s]))
+  (:require-macros [cljs.spec.alpha :as s]))
 
 (def non-closing-elements
   #{:area :base :br :col :command

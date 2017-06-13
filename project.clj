@@ -4,8 +4,9 @@
 
   :min-lein-version "2.5.3"
 
-  :dependencies [[org.clojure/clojure "1.9.0-alpha15"]
-                 [org.clojure/clojurescript "1.9.521"]
+  :dependencies [[org.clojure/clojure "1.9.0-alpha16"]
+                 [org.clojure/clojurescript "1.9.562"]
+                 [org.clojure/spec.alpha "0.1.109"]
                  [figwheel-sidecar "0.5.10"]]
   :plugins [[lein-cljsbuild "1.1.6"]
             [lein-figwheel "0.5.10"]
@@ -20,10 +21,14 @@
                                    :output-dir "target/server_dev"
                                    :target :nodejs
                                    :optimizations :none
+                                   :language-in :ecmascript5-strict
+                                   :language-out :ecmascript5-strict
                                    :source-map true}}
                        {:id "prod"
                         :source-paths ["src"]
                         :compiler {:output-to "server.js"
                                    :output-dir "target/server_prod"
                                    :target :nodejs
+                                   :language-in :ecmascript5-strict
+                                   :language-out :ecmascript5-strict
                                    :optimizations :simple}}]})
