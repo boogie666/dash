@@ -21,7 +21,7 @@
          :args (s/? ::params)))
 
 (s/def ::node
-  (s/or :text #(or (string? %) (number? %))
+  (s/or :text #(or (string? %) (number? %) (nil? %))
         :void-element ::void-element
         :element ::element))
 

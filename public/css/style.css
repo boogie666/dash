@@ -1,5 +1,5 @@
 .card {
-  min-width: 250px;
+  width: 250px;
 }
 .card:hover {
   transform: scale(1.005)
