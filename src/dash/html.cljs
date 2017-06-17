@@ -3,7 +3,6 @@
             [clojure.string :as string])
   (:require-macros [cljs.spec.alpha :as s]))
 
-
 (s/def ::params (s/map-of keyword? any?))
 
 (s/def ::element
@@ -26,11 +25,10 @@
         :void-element ::void-element
         :element ::element))
 
-
 (declare stringify-html)
 
 (defn- stringify-params [params]
-  (let [kvs (map #(str (name (first %)) "=\"" (second %) "\"" ) params)]
+  (let [kvs (map #(str (name (first %)) "=\"" (second %) "\"") params)]
     (if (seq kvs)
       (str " " (string/join " " kvs))
       nil)))
@@ -43,14 +41,13 @@
       (str "<" tag (stringify-params params) "/>")
       (let [children (map stringify-html content)]
         (str "<" tag (stringify-params params) ">"
-            (string/join "" children)
-            "</" tag ">")))))
+             (string/join "" children)
+             "</" tag ">")))))
 
 (defn- stringify-void-element [data]
   (let [tag (name (:name data))
         params (:args data)]
     (str "<" tag (stringify-params params) ">")))
-
 
 (defn- stringify-html [html-ast]
   (let [[type data] html-ast]
@@ -59,8 +56,9 @@
       :void-element (stringify-void-element data)
       :element (stringify-element data))))
 
-
-(defn html->string [html]
+(defn html->string
+  "" 
+  [html]
   (let [parsed-html (s/conform ::node html)]
     (if (= ::s/invalid parsed-html)
       (throw (js/Error. (s/explain-str ::node html)))

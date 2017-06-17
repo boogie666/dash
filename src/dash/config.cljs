@@ -2,8 +2,6 @@
   (:require [clojure.spec.alpha :as s])
   (:require-macros [cljs.spec.alpha :as s]))
 
-
-
 (s/def ::port number?)
 
 (s/def ::page-title string?)
@@ -30,13 +28,11 @@
 (s/def ::config
   (s/keys :req-un [::port ::page-title ::images-folder ::dash-items]))
 
-
 (defn valid? [config]
   (s/valid? ::config config))
 
 (defn parse [config]
   (s/conform ::config config))
-
 
 (defn validation-error-message [config]
   (s/explain-str ::config config))
