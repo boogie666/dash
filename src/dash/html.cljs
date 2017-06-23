@@ -49,15 +49,17 @@
         params (:args data)]
     (str "<" tag (stringify-params params) ">")))
 
-(defn- stringify-html [html-ast]
-  (let [[type data] html-ast]
-    (case type
-      :text (str data)
-      :void-element (stringify-void-element data)
-      :element (stringify-element data))))
+(defn- stringify-html [[type data]]
+  (case type
+    :text (str data)
+    :void-element (stringify-void-element data)
+    :element (stringify-element data)))
+
+(s/fdef html->string
+  :args ::node
+  :ret string?)
 
 (defn html->string
-  "" 
   [html]
   (let [parsed-html (s/conform ::node html)]
     (if (= ::s/invalid parsed-html)
