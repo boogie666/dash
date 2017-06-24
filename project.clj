@@ -14,7 +14,9 @@
   :clean-targets ["server.js" "target"]
   :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.10"]
                                   [com.cemerick/piggieback "0.2.2"]
-                                  [org.clojure/tools.nrepl  "0.2.13"]]
+                                  [org.clojure/tools.nrepl  "0.2.13"]
+                                  [org.clojure/test.check "0.9.0"]
+                                  [proto-repl "0.3.1"]]
 
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}}
 

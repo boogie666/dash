@@ -1,7 +1,10 @@
 (ns dash.html
   (:require [clojure.spec.alpha :as s]
-            [clojure.string :as string])
-  (:require-macros [cljs.spec.alpha :as s]))
+            [clojure.string :as string]
+            [clojure.spec.gen.alpha :as gen])
+
+  (:require-macros [cljs.spec.alpha :as s]
+                   [cljs.spec.gen.alpha :as gen]))
 
 (s/def ::params (s/map-of keyword? any?))
 
@@ -10,18 +13,29 @@
          :args (s/? ::params)
          :body (s/* ::node)))
 
-(def non-closing-elements
-  #{:area :base :br :col :command
-    :embed :hr :img :input :link
-    :meta :keygen :param :source
-    :track :wbr})
-
 (s/def ::void-element
-  (s/cat :name non-closing-elements
+  (s/cat :name #{:area :base :br :col :command :embed
+                 :hr :img :input :link :meta
+                 :keygen :param :source :track :wbr}
          :args (s/? ::params)))
 
+
+(defn maybe-text? [x]
+  (or (string? x) (number? x) (nil? x)))
+
+(s/def ::text-element
+  (s/with-gen maybe-text?
+    #(gen/fmap (fn [[what string number]]
+                  (case what
+                    0 nil
+                    1 string
+                    2 number))
+        (gen/tuple (s/gen #{0 1 2}) (gen/string-alphanumeric) (gen/int)))))
+
+
+
 (s/def ::node
-  (s/or :text #(or (string? %) (number? %) (nil? %))
+  (s/or :text ::text-element
         :void-element ::void-element
         :element ::element))
 
@@ -56,12 +70,12 @@
     :element (stringify-element data)))
 
 (s/fdef html->string
-  :args ::node
+  :args (s/cat :node ::node)
   :ret string?)
 
 (defn html->string
   [html]
   (let [parsed-html (s/conform ::node html)]
-    (if (= ::s/invalid parsed-html)
-      (throw (js/Error. (s/explain-str ::node html)))
-      (str "<!DOCTYPE html>\n" (stringify-html parsed-html)))))
+    (when (= parsed-html ::s/invalid)
+      (throw (js/Error. (s/explain-str ::node html))))
+    (str "<!DOCTYPE html>\n" (stringify-html parsed-html))))
