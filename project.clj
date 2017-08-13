@@ -5,18 +5,17 @@
   :min-lein-version "2.5.3"
 
   :dependencies [[org.clojure/clojure "1.9.0-alpha16"]
-                 [org.clojure/clojurescript "1.9.562"]
+                 [org.clojure/clojurescript "1.9.854"]
                  [org.clojure/spec.alpha "0.1.123"]]
   :plugins [[lein-cljsbuild "1.1.6"]
             [lein-figwheel "0.5.10"]
             [lein-ancient "0.6.10"]]
   :source-paths ["src"]
   :clean-targets ["server.js" "target"]
-  :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.10"]
+  :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.12"]
                                   [com.cemerick/piggieback "0.2.2"]
                                   [org.clojure/tools.nrepl  "0.2.13"]
-                                  [org.clojure/test.check "0.9.0"]
-                                  [proto-repl "0.3.1"]]
+                                  [org.clojure/test.check "0.9.0"]]
 
                    :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}}
 
