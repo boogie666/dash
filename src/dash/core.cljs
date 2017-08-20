@@ -11,18 +11,19 @@
 (def fs (js/require "fs"))
 (def path (js/require "path"))
 
-(def args (.-argv js/process))
-(when (<= (count args) 2)
-  (throw (js/Error. "Missing config.edn")))
 
-(def config (r/read-string (.toString (.readFileSync fs (last (.-argv js/process))))))
+(defn load-config [args]
+  (let [_ (when-not (<= 2 (count args))
+            (throw (js/Error. "Missing config.edn")))
+        config (r/read-string (.toString (.readFileSync fs (last (.-argv js/process)))))
+        _ (when-not (c/valid? config)
+            (throw (js/Error. (str "Configuration is invalid\n\n"
+                                 (c/validation-error-message config)))))]
+    config))
 
-(when-not (c/valid? config)
-  (throw (js/Error. (str "Configuration is invalid\n\n"
-                         (c/validation-error-message config)))))
-
-(defn -main []
-  (let [app (express)]
+(defn -main [args]
+  (let [config (load-config args)
+        app (express)]
     (.use app (.static express (:images-folder config)))
     (.use app (.static express (.join path (js* "__dirname") "public")))
     (.get app "/" (fn [_ resp] (.send resp (d/dashboard-page (c/parse config)))))
