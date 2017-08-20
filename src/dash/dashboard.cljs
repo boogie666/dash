@@ -13,7 +13,7 @@
 
 (defn dash-item [{:keys [url img title desc]}]
   [:div {:class "w3-card-2 w3-hover-shadow w3-quarter w3-margin-right card"}
-   [:a {:href url :style "text-decoration: none;"}
+   [:a {:href url}
     [:img {:class "w3-border-bottom" :src img :style "width: 100%" :alt title}]
     [:div {:class "w3-container"}
      [:h4 title]
@@ -39,8 +39,9 @@
      [:div {:class "w3-container"}
       [:h4 {:class "w3-border-bottom"} (:page-title config)]]
      (into [:div {:class "w3-container"}]
-           (map group-item
-                (conj groups (when (seq (:items misc)) misc))))]))
+           (map group-item)
+           (conj groups
+                 (when (seq (:items misc)) misc)))]))
 
 (defn dashboard-page [config]
   (h/html->string

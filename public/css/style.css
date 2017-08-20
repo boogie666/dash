@@ -1,12 +1,14 @@
 .card {
   width: 250px;
 }
-.card:hover {
-  transform: scale(1.005)
-}
 .card img{
   filter: opacity(90%);
 }
 .card:hover img {
   filter: opacity(100%);
+}
+
+.card > a {
+  text-decoration: none;
+  outline: none;
 }
